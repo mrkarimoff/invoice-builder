@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import InvoiceForm from "@/components/main/invoiceForm/invoiceForm";
-import InvoiceView from "@/components/main/invoiceView/invoiceView";
-import { useState } from "react";
+import InvoiceForm from '@/components/main/invoiceForm/invoiceForm';
+import InvoiceView from '@/components/main/invoiceView/invoiceView';
+import { useState } from 'react';
 
 const Page = () => {
   const [showView, setShowView] = useState(true);
