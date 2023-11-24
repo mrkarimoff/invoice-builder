@@ -3,12 +3,11 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import ReactMarkdown from 'react-markdown';
-import customMarkdownComponents from './customMarkdownComponents';
 import { isOdd } from '@/lib/utils';
+import ReactMarkdown from 'react-markdown';
+import { customComponents } from './customComponents';
 
 const invoices = [
   {
@@ -112,7 +111,7 @@ export default function InvoiceTable() {
               {invoice.date}
             </TableCell>
             <TableCell className="border border-slate-200">
-              <ReactMarkdown components={customMarkdownComponents}>
+              <ReactMarkdown components={customComponents}>
                 {invoice.description}
               </ReactMarkdown>
             </TableCell>

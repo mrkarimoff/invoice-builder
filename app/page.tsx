@@ -1,4 +1,4 @@
-import InvoiceView from '@/components/invoiceView/invoiceView';
+import InvoiceView from '@/app/_components/invoiceView/invoiceView';
 
 const HomePage = () => {
   return (

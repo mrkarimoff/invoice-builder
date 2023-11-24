@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-const customMarkdownComponents = {
+export const customComponents = {
   p: (
     props: DetailedHTMLProps<
       HTMLAttributes<HTMLParagraphElement>,
@@ -17,5 +17,3 @@ const customMarkdownComponents = {
     props: DetailedHTMLProps<HTMLAttributes<HTMLLIElement>, HTMLLIElement>,
   ) => <li className="before:mr-1.5 before:content-['•']">{props.children}</li>,
 };
-
-export default customMarkdownComponents;
