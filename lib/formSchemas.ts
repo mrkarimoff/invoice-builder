@@ -28,3 +28,20 @@ export const detailsFormSchema = z.object({
     message: 'The invoice purpose must be at least 15 characters.',
   }),
 });
+
+export const itemsFormSchema = z.object({
+  date: z
+    .string()
+    .regex(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/, {
+      message: 'Invalid date format.',
+    }),
+  description: z.string().min(15, {
+    message: 'Description must be at least 15 characters.',
+  }),
+  hours: z.string().regex(/^(0?[1-9]|1[0-2]):[0-5][0-9]$/, {
+    message: 'Invalid time format.',
+  }),
+  rate: z.number().min(1, {
+    message: 'Rate number cannot be 0 or less',
+  }),
+});

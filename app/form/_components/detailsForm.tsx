@@ -161,7 +161,7 @@ const DetailsForm = () => {
                 />
               </FormControl>
               <FormDescription>
-                Date you issue invoice (the 1st of every month)
+                Date you issue invoice (the 1st of every month).
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -181,7 +181,7 @@ const DetailsForm = () => {
                 />
               </FormControl>
               <FormDescription>
-                Put &quot;Upon receipt&quot; if date is unknown
+                Put &quot;Upon receipt&quot; if date is unknown.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -201,7 +201,7 @@ const DetailsForm = () => {
                 />
               </FormControl>
               <FormDescription>
-                E.g: dates worked the previous month (x-y)
+                E.g: dates worked the previous month (x-y).
               </FormDescription>
               <FormMessage />
             </FormItem>
