@@ -13,7 +13,7 @@ const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
     address,
     dueDate,
     email,
-    service,
+    invoicePurpose,
     invoiceId,
     issueDate,
     receiverName,
@@ -77,7 +77,7 @@ const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
           </div>
           <div>
             <h2 className="font-bold text-cyan-800">FOR:</h2>
-            <p className="text-xs">{service}</p>
+            <p className="text-xs">{invoicePurpose}</p>
           </div>
         </div>
       </div>

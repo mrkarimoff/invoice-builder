@@ -17,7 +17,7 @@ const InvoiceView = () => {
     invoiceId: '#2',
     issueDate: '10/01/2023',
     dueDate: 'upon receipt',
-    service: 'dates worked the previous month (10/02/2023 -10/31/2023)',
+    invoicePurpose: 'dates worked the previous month (10/02/2023 -10/31/2023)',
   };
 
   const handlePrint = useReactToPrint({

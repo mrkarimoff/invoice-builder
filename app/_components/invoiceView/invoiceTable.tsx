@@ -103,10 +103,7 @@ export default function InvoiceTable() {
         </TableRow>
 
         {invoices.map((invoice, index) => (
-          <TableRow
-            className={`${isOdd(index) && 'bg-slate-50'}`}
-            key={invoice.date}
-          >
+          <TableRow className={`${isOdd(index) && 'bg-slate-50'}`} key={index}>
             <TableCell className="border border-slate-200">
               {invoice.date}
             </TableCell>

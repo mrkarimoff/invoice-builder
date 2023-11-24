@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import DetailsForm from './_components/detailsForm';
 
 const FormPage = () => {
   return (
@@ -6,11 +7,10 @@ const FormPage = () => {
       <Link className="rounded-md border border-red-100 p-2" href={'/'}>
         See Invoice
       </Link>
-      <h2>Invoice form</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium,
-        iste.
-      </p>
+      <h2 className="text-center text-lg">Invoice form</h2>
+      <div className="rounded-md bg-slate-50 p-3">
+        <DetailsForm />
+      </div>
     </div>
   );
 };

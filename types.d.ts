@@ -6,5 +6,5 @@ export interface InvoiceDetails {
   invoiceId: string;
   issueDate: string;
   dueDate: string;
-  service: string;
+  invoicePurpose: string;
 }
