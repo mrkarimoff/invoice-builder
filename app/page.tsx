@@ -1,21 +1,11 @@
-'use client';
+import InvoiceView from '@/components/invoiceView/invoiceView';
 
-import InvoiceForm from '@/components/main/invoiceForm/invoiceForm';
-import InvoiceView from '@/components/main/invoiceView/invoiceView';
-import { useState } from 'react';
-
-const Page = () => {
-  const [showView, setShowView] = useState(true);
-
+const HomePage = () => {
   return (
     <div className="container mx-auto p-4">
-      {showView ? (
-        <InvoiceView setShowView={setShowView} />
-      ) : (
-        <InvoiceForm setShowView={setShowView} />
-      )}
+      <InvoiceView />
     </div>
   );
 };
 
-export default Page;
+export default HomePage;

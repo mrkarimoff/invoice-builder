@@ -1,17 +1,16 @@
+'use client';
+
 import { Inter, Lora } from 'next/font/google';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { Button } from '../../ui/button';
 import InvoiceTable from './invoiceTable';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const lora = Lora({ subsets: ['latin'] });
 const inter = Inter({ subsets: ['latin'] });
 
-type InvoiceViewProps = {
-  setShowView: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const InvoiceView = ({ setShowView }: InvoiceViewProps) => {
+const InvoiceView = () => {
   const componentRef = useRef(null);
 
   const handlePrint = useReactToPrint({
@@ -21,9 +20,9 @@ const InvoiceView = ({ setShowView }: InvoiceViewProps) => {
   return (
     <>
       <div className="flex gap-2">
-        <Button onClick={() => setShowView(false)} variant={'secondary'}>
+        <Link className="rounded-md border border-red-100 p-2" href={'/form'}>
           Edit Invoice
-        </Button>
+        </Link>
         <Button variant={'default'} onClick={handlePrint}>
           Print this out!
         </Button>
