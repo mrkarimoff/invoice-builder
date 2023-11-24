@@ -2,6 +2,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableRow,
 } from '@/components/ui/table';
@@ -16,9 +17,8 @@ const invoices = [
  - Fixing the md render errors 
  - Working on the product switcher 
  - Working on “generateStaticParams” on the dynamic page `,
-    hours: '7.66',
-    rate: '$19',
-    amount: '$145.54',
+    hours: 7.66,
+    rate: 19,
   },
   {
     date: '10/02/2023',
@@ -26,9 +26,8 @@ const invoices = [
  - Fixing the md render errors 
  - Working on the product switcher 
  - Working on “generateStaticParams” on the dynamic page `,
-    hours: '7.66',
-    rate: '$19',
-    amount: '$145.54',
+    hours: 7.66,
+    rate: 19,
   },
   {
     date: '10/02/2023',
@@ -36,9 +35,8 @@ const invoices = [
  - Fixing the md render errors 
  - Working on the product switcher 
  - Working on “generateStaticParams” on the dynamic page `,
-    hours: '7.66',
-    rate: '$19',
-    amount: '$145.54',
+    hours: 7.66,
+    rate: 19,
   },
   {
     date: '10/02/2023',
@@ -46,9 +44,8 @@ const invoices = [
  - Fixing the md render errors 
  - Working on the product switcher 
  - Working on “generateStaticParams” on the dynamic page `,
-    hours: '7.66',
-    rate: '$19',
-    amount: '$145.54',
+    hours: 7.66,
+    rate: 19,
   },
   {
     date: '10/02/2023',
@@ -56,9 +53,8 @@ const invoices = [
  - Fixing the md render errors 
  - Working on the product switcher 
  - Working on “generateStaticParams” on the dynamic page `,
-    hours: '7.66',
-    rate: '$19',
-    amount: '$145.54',
+    hours: 7.66,
+    rate: 19,
   },
   {
     date: '10/02/2023',
@@ -66,9 +62,8 @@ const invoices = [
  - Fixing the md render errors 
  - Working on the product switcher 
  - Working on “generateStaticParams” on the dynamic page `,
-    hours: '7.66',
-    rate: '$19',
-    amount: '$145.54',
+    hours: 7.66,
+    rate: 19,
   },
   {
     date: '10/02/2023',
@@ -76,11 +71,14 @@ const invoices = [
  - Fixing the md render errors 
  - Working on the product switcher 
  - Working on “generateStaticParams” on the dynamic page `,
-    hours: '7.66',
-    rate: '$19',
-    amount: '$145.54',
+    hours: 7.66,
+    rate: 19,
   },
 ];
+
+const totalAmount = invoices.reduce((total, item) => {
+  return total + item.hours * item.rate;
+}, 0);
 
 export default function InvoiceTable() {
   return (
@@ -116,14 +114,24 @@ export default function InvoiceTable() {
               {invoice.hours}
             </TableCell>
             <TableCell className="border border-slate-200">
-              {invoice.rate}
+              ${invoice.rate}
             </TableCell>
             <TableCell className="border border-slate-200 font-bold">
-              {invoice.amount}
+              ${invoice.rate * invoice.hours}
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
+      <TableFooter className="bg-white text-black">
+        <TableRow>
+          <TableCell className="text-right text-base font-bold" colSpan={4}>
+            TOTAL
+          </TableCell>
+          <TableCell className="border border-slate-200 text-right font-bold">
+            ${totalAmount.toFixed(2)}
+          </TableCell>
+        </TableRow>
+      </TableFooter>
     </Table>
   );
 }

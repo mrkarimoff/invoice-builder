@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import { detailsFormSchema } from '@/lib/formSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -37,10 +38,13 @@ const DetailsForm = () => {
 
   return (
     <Form {...form}>
+      <h4 className="my-1 font-semibold">Invoice Details</h4>
+      <Separator />
+
       <form
         id="detailsForm"
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col flex-wrap justify-center gap-5 md:flex-row"
+        className="mt-4 flex flex-col flex-wrap justify-center gap-5 md:flex-row"
       >
         <FormField
           control={form.control}

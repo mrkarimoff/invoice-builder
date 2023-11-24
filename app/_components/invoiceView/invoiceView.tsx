@@ -27,7 +27,7 @@ const InvoiceView = () => {
   return (
     <>
       <div className="flex gap-2">
-        <Link className="rounded-md border border-red-100 p-2" href={'/form'}>
+        <Link className="rounded-md border border-blue-100 p-2" href={'/form'}>
           Edit Invoice
         </Link>
         <Button variant={'default'} onClick={handlePrint}>
