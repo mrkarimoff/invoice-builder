@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "InvoiceDetails" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "senderName" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -8,14 +8,18 @@ CREATE TABLE "InvoiceDetails" (
     "invoiceId" TEXT NOT NULL,
     "issueDate" TEXT NOT NULL,
     "dueDate" TEXT NOT NULL,
-    "invoicePurpose" TEXT NOT NULL
+    "invoicePurpose" TEXT NOT NULL,
+
+    CONSTRAINT "InvoiceDetails_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "InvoiceItems" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "date" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "hours" INTEGER NOT NULL,
-    "rate" INTEGER NOT NULL
+    "hours" DOUBLE PRECISION NOT NULL,
+    "rate" INTEGER NOT NULL,
+
+    CONSTRAINT "InvoiceItems_pkey" PRIMARY KEY ("id")
 );

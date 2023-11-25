@@ -39,11 +39,9 @@ const ItemForm = () => {
     setIsSaving(true);
     const decimalTime = timeStringToDecimal(values.hours);
 
-    console.log(+decimalTime.toFixed(2));
-
     const result = await saveInvoiceItem({
       ...values,
-      hours: 8.5,
+      hours: +decimalTime.toFixed(2),
       rate: +values.rate,
     });
 
