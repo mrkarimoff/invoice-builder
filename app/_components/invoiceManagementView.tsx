@@ -26,6 +26,7 @@ const InvoiceManagementView = () => {
         });
         return;
       }
+
       setInvoiceItems(result.data);
     } catch (error) {
       setError('An error occurred while fetching data.');
