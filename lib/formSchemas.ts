@@ -41,7 +41,13 @@ export const itemsFormSchema = z.object({
   hours: z.string().regex(/^(0?[1-9]|1[0-2]):[0-5][0-9]$/, {
     message: 'Invalid time format.',
   }),
-  rate: z.number().min(1, {
-    message: 'Rate number cannot be 0 or less',
-  }),
+  rate: z.string().refine(
+    (value) => {
+      const parsedValue = Number(value);
+      return !isNaN(parsedValue) && parsedValue > 1;
+    },
+    {
+      message: 'Rate must be a number greater than 1.',
+    },
+  ),
 });

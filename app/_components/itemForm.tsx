@@ -13,24 +13,52 @@ import {
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
 import { itemsFormSchema } from '@/lib/formSchemas';
+import { timeStringToDecimal } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { saveInvoiceItem } from '../_actions/actions';
+import { useState } from 'react';
 
 const ItemForm = () => {
+  const { toast } = useToast();
+  const [isSaving, setIsSaving] = useState(false);
   const form = useForm<z.infer<typeof itemsFormSchema>>({
     resolver: zodResolver(itemsFormSchema),
     defaultValues: {
       date: '',
       description: '',
       hours: '',
-      rate: 19,
+      rate: '19',
     },
   });
 
-  function onSubmit(values: z.infer<typeof itemsFormSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof itemsFormSchema>) {
+    setIsSaving(true);
+    const decimalTime = timeStringToDecimal(values.hours);
+
+    console.log(+decimalTime.toFixed(2));
+
+    const result = await saveInvoiceItem({
+      ...values,
+      hours: 8.5,
+      rate: +values.rate,
+    });
+
+    if (!result.data) {
+      toast({
+        title: result.message,
+        variant: 'destructive',
+      });
+      throw new Error(result.message);
+    }
+
+    toast({
+      title: result.message + '✅',
+    });
+    setIsSaving(false);
   }
 
   return (
@@ -108,6 +136,7 @@ const ItemForm = () => {
               <FormLabel>Rate</FormLabel>
               <FormControl>
                 <Input
+                  type="number"
                   className="w-full md:w-[280px] "
                   placeholder="rate"
                   {...field}
@@ -120,8 +149,13 @@ const ItemForm = () => {
         />
       </form>
       <div className="mt-3 flex items-center justify-end gap-1.5">
-        <Button className="px-8" form="itemForm" type="submit">
-          Save
+        <Button
+          className={`px-8 ${isSaving && 'bg-muted'}`}
+          form="itemForm"
+          type="submit"
+          disabled={isSaving}
+        >
+          {isSaving ? 'Saving...' : 'Save'}
         </Button>
       </div>
     </Form>

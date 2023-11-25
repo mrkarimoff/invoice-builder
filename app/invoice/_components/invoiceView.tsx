@@ -6,76 +6,10 @@ import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import InvoiceDetails from './invoiceDetails';
 import DataTable from '@/components/dataTable';
-import { templateData } from '@/lib/constants';
+import { invoices, templateData } from '@/lib/constants';
 
 const InvoiceView = () => {
   const componentRef = useRef(null);
-
-  const invoices = [
-    {
-      date: '10/02/2023',
-      description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-      hours: 7.66,
-      rate: 19,
-    },
-    {
-      date: '10/02/2023',
-      description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-      hours: 7.66,
-      rate: 19,
-    },
-    {
-      date: '10/02/2023',
-      description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-      hours: 7.66,
-      rate: 19,
-    },
-    {
-      date: '10/02/2023',
-      description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-      hours: 7.66,
-      rate: 19,
-    },
-    {
-      date: '10/02/2023',
-      description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-      hours: 7.66,
-      rate: 19,
-    },
-    {
-      date: '10/02/2023',
-      description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-      hours: 7.66,
-      rate: 19,
-    },
-    {
-      date: '10/02/2023',
-      description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-      hours: 7.66,
-      rate: 19,
-    },
-  ];
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,

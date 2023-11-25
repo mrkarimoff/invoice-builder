@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Table,
   TableBody,
@@ -7,13 +9,13 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { isOdd } from '@/lib/utils';
+import { InvoiceItems } from '@prisma/client';
 import { PenSquare, Trash } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { customComponents } from './customComponents';
-import { type InvoiceItem } from '@/types';
 
 type DataTableProps = {
-  data: InvoiceItem[];
+  data: InvoiceItems[];
   actions?: string;
 };
 
@@ -43,7 +45,10 @@ export default function DataTable({ data, actions }: DataTableProps) {
         </TableRow>
 
         {data.map((invoice, index) => (
-          <TableRow className={`${isOdd(index) && 'bg-slate-50'}`} key={index}>
+          <TableRow
+            className={`${isOdd(index) && 'bg-slate-50'}`}
+            key={invoice.id}
+          >
             <TableCell className="border border-slate-200">
               {invoice.date}
             </TableCell>

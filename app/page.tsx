@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import DetailsForm from './_components/detailsForm';
-import ItemForm from './_components/itemForm';
+import InvoiceManagementView from './_components/invoiceManagementView';
 
 const Page = () => {
   return (
@@ -16,9 +16,7 @@ const Page = () => {
         <div className="rounded-md bg-blue-50 p-4">
           <DetailsForm />
         </div>
-        <div className="rounded-md bg-blue-50 p-4">
-          <ItemForm />
-        </div>
+        <InvoiceManagementView />
       </div>
     </div>
   );
