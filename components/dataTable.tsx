@@ -7,80 +7,17 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { isOdd } from '@/lib/utils';
+import { PenSquare, Trash } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { customComponents } from './customComponents';
+import { type InvoiceItem } from '@/types';
 
-const invoices = [
-  {
-    date: '10/02/2023',
-    description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-    hours: 7.66,
-    rate: 19,
-  },
-  {
-    date: '10/02/2023',
-    description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-    hours: 7.66,
-    rate: 19,
-  },
-  {
-    date: '10/02/2023',
-    description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-    hours: 7.66,
-    rate: 19,
-  },
-  {
-    date: '10/02/2023',
-    description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-    hours: 7.66,
-    rate: 19,
-  },
-  {
-    date: '10/02/2023',
-    description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-    hours: 7.66,
-    rate: 19,
-  },
-  {
-    date: '10/02/2023',
-    description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-    hours: 7.66,
-    rate: 19,
-  },
-  {
-    date: '10/02/2023',
-    description: `Working on the new documentation website 
- - Fixing the md render errors 
- - Working on the product switcher 
- - Working on “generateStaticParams” on the dynamic page `,
-    hours: 7.66,
-    rate: 19,
-  },
-];
+type DataTableProps = {
+  data: InvoiceItem[];
+  actions?: string;
+};
 
-const totalAmount = invoices.reduce((total, item) => {
-  return total + item.hours * item.rate;
-}, 0);
-
-export default function InvoiceTable() {
+export default function DataTable({ data, actions }: DataTableProps) {
   return (
     <Table className="mt-5 border">
       <TableBody>
@@ -98,9 +35,14 @@ export default function InvoiceTable() {
           <TableHead className="w-[100px] border border-slate-200">
             AMOUNT
           </TableHead>
+          {actions && (
+            <TableHead className="w-[100px] border border-slate-200">
+              ACTIONS
+            </TableHead>
+          )}
         </TableRow>
 
-        {invoices.map((invoice, index) => (
+        {data.map((invoice, index) => (
           <TableRow className={`${isOdd(index) && 'bg-slate-50'}`} key={index}>
             <TableCell className="border border-slate-200">
               {invoice.date}
@@ -119,6 +61,18 @@ export default function InvoiceTable() {
             <TableCell className="border border-slate-200 font-bold">
               ${invoice.rate * invoice.hours}
             </TableCell>
+            {actions && (
+              <TableCell className="border border-slate-200 font-bold">
+                <div className="flex justify-between gap-1">
+                  <button>
+                    <PenSquare className="text-blue-500 transition-colors hover:text-blue-300" />
+                  </button>
+                  <button>
+                    <Trash className="text-red-500 transition-colors hover:text-red-300" />
+                  </button>
+                </div>
+              </TableCell>
+            )}
           </TableRow>
         ))}
       </TableBody>
@@ -128,7 +82,10 @@ export default function InvoiceTable() {
             TOTAL
           </TableCell>
           <TableCell className="border border-slate-200 text-right font-bold">
-            ${totalAmount.toFixed(2)}
+            $
+            {data
+              .reduce((total, item) => total + item.hours * item.rate, 0)
+              .toFixed(2)}
           </TableCell>
         </TableRow>
       </TableFooter>

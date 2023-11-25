@@ -21,8 +21,10 @@ const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
   } = data;
 
   return (
-    <div className={`${lora.className} flex w-full justify-between`}>
-      <div className="flex flex-col gap-10 pt-10">
+    <div
+      className={`${lora.className} flex w-full flex-wrap items-center  py-2 sm:justify-between`}
+    >
+      <div className="order-2 flex flex-col gap-10 pt-10 sm:order-1">
         <div>
           <h2 className="font-bold text-cyan-800">FROM:</h2>
           <h2 className="font-bold">{senderName.toUpperCase()}</h2>
@@ -38,8 +40,8 @@ const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
           <h2 className="font-bold">{receiverName.toUpperCase()}</h2>
         </div>
       </div>
-      <div className="text-right">
-        <h1 className="w-full text-right text-4xl font-bold uppercase tracking-wider text-cyan-700">
+      <div className="order-1 sm:order-2 sm:text-right">
+        <h1 className="w-full text-4xl font-bold uppercase tracking-wider text-cyan-700 sm:text-right">
           Invoice
         </h1>
         <div className="mt-9 flex flex-col gap-14">
