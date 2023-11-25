@@ -22,7 +22,11 @@ import * as z from 'zod';
 import { saveInvoiceItem } from '../_actions/actions';
 import { useState } from 'react';
 
-const ItemForm = () => {
+type ItemFormProps = {
+  getInvoiceItems: () => Promise<void>;
+};
+
+const ItemForm = ({ getInvoiceItems }: ItemFormProps) => {
   const { toast } = useToast();
   const [isSaving, setIsSaving] = useState(false);
   const form = useForm<z.infer<typeof itemsFormSchema>>({
@@ -56,7 +60,9 @@ const ItemForm = () => {
     toast({
       title: result.message + '✅',
     });
+    getInvoiceItems();
     setIsSaving(false);
+    form.reset();
   }
 
   return (
@@ -148,7 +154,7 @@ const ItemForm = () => {
       </form>
       <div className="mt-3 flex items-center justify-end gap-1.5">
         <Button
-          className={`px-8 ${isSaving && 'bg-muted'}`}
+          className="px-8"
           form="itemForm"
           type="submit"
           disabled={isSaving}

@@ -4,7 +4,7 @@ import DataTable from '@/components/dataTable';
 import { useToast } from '@/components/ui/use-toast';
 import { InvoiceItems } from '@prisma/client';
 import { useCallback, useEffect, useState } from 'react';
-import { getAllItems } from '../_actions/actions';
+import { deleteItem, getAllItems } from '../_actions/actions';
 import ItemForm from './itemForm';
 import NoDataMessage from './noDataMessage';
 
@@ -15,9 +15,9 @@ const InvoiceManagementView = () => {
   const { toast } = useToast();
 
   const getInvoiceItems = useCallback(async () => {
+    setLoading(true);
     try {
       const result = await getAllItems();
-
       if (!result.data) {
         setError(result.message);
         toast({
@@ -26,14 +26,12 @@ const InvoiceManagementView = () => {
         });
         return;
       }
-
       setInvoiceItems(result.data);
     } catch (error) {
       setError('An error occurred while fetching data.');
       console.error(error);
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   }, [toast, setInvoiceItems]);
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const InvoiceManagementView = () => {
   return (
     <div className="space-y-5">
       <div className="rounded-md bg-blue-50 p-4">
-        <ItemForm />
+        <ItemForm getInvoiceItems={getInvoiceItems} />
       </div>
       <div className="rounded-md bg-white p-4">
         <h4 className="my-1 font-semibold">Invoice Table</h4>
@@ -54,7 +52,10 @@ const InvoiceManagementView = () => {
         ) : (
           <>
             {invoiceItems.length > 0 ? (
-              <DataTable data={invoiceItems} />
+              <DataTable
+                data={invoiceItems}
+                actions={{ get: getInvoiceItems, delete: deleteItem }}
+              />
             ) : (
               <NoDataMessage />
             )}

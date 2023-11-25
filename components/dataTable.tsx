@@ -1,5 +1,6 @@
 'use client';
 
+import { type DeleteItem } from '@/app/_actions/actions';
 import {
   Table,
   TableBody,
@@ -10,16 +11,40 @@ import {
 } from '@/components/ui/table';
 import { isOdd } from '@/lib/utils';
 import { InvoiceItems } from '@prisma/client';
-import { PenSquare, Trash } from 'lucide-react';
+import { Loader, PenSquare, Trash } from 'lucide-react';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { customComponents } from './customComponents';
+import { useToast } from './ui/use-toast';
 
 type DataTableProps = {
   data: InvoiceItems[];
-  actions?: string;
+  actions?: { get: () => Promise<void>; delete: DeleteItem };
 };
 
 export default function DataTable({ data, actions }: DataTableProps) {
+  const { toast } = useToast();
+  const [itemId, setItemId] = useState<number | null>();
+
+  const handleDelete = async (id: number) => {
+    setItemId(id);
+    if (actions) {
+      const result = await actions.delete(id);
+      if (!result.data) {
+        toast({
+          title: result.message,
+          variant: 'destructive',
+        });
+      }
+
+      actions.get();
+      toast({
+        title: result.message + '✅',
+      });
+      setItemId(null);
+    }
+  };
+
   return (
     <Table className="mt-5 border">
       <TableBody>
@@ -72,8 +97,15 @@ export default function DataTable({ data, actions }: DataTableProps) {
                   <button>
                     <PenSquare className="text-blue-500 transition-colors hover:text-blue-300" />
                   </button>
-                  <button>
-                    <Trash className="text-red-500 transition-colors hover:text-red-300" />
+                  <button
+                    disabled={itemId === invoice.id}
+                    onClick={() => handleDelete(invoice.id)}
+                  >
+                    {itemId === invoice.id ? (
+                      <Loader className="animate-spin text-red-500" />
+                    ) : (
+                      <Trash className="text-red-500 transition-colors hover:text-red-300" />
+                    )}
                   </button>
                 </div>
               </TableCell>

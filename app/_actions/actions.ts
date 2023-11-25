@@ -3,6 +3,7 @@
 import prisma from '@/lib/prisma';
 import { InvoiceItem } from '@/types';
 
+// add item
 export async function saveInvoiceItem(data: InvoiceItem) {
   try {
     const newItem = await prisma.invoiceItems.create({
@@ -14,6 +15,7 @@ export async function saveInvoiceItem(data: InvoiceItem) {
   }
 }
 
+// get all items
 export async function getAllItems() {
   try {
     const invoiceItems = await prisma.invoiceItems.findMany();
@@ -26,3 +28,21 @@ export async function getAllItems() {
     return { data: null, error, message: 'Failed to get Items' };
   }
 }
+
+// delete item
+export async function deleteItem(id: number) {
+  try {
+    const deletedItem = await prisma.invoiceItems.delete({
+      where: { id },
+    });
+    return {
+      data: deletedItem,
+      error: null,
+      message: 'Item deleted successfully',
+    };
+  } catch (error) {
+    return { data: null, error, message: 'Failed to delete Item' };
+  }
+}
+
+export type DeleteItem = typeof deleteItem;
