@@ -1,18 +1,25 @@
-import { type InvoiceDetails } from '@/types';
+import { type InvoiceDetails } from '@prisma/client';
 import { Inter, Lora } from 'next/font/google';
+import Link from 'next/link';
 
 const lora = Lora({ subsets: ['latin'] });
 const inter = Inter({ subsets: ['latin'] });
 
-type InvoiceDetailsProps = {
+type InvoiceDetailsViewProps = {
   data: InvoiceDetails | null;
 };
 
-const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
+const InvoiceDetailsView = ({ data }: InvoiceDetailsViewProps) => {
   if (!data)
     return (
       <div className="flex h-20 w-full items-center justify-center">
-        <p className="text-muted-foreground">No details provided!</p>
+        <p className="text-muted-foreground">
+          No details provided! Please fill out{' '}
+          <Link className="text-blue-500 underline" href="/">
+            Invoice Details
+          </Link>{' '}
+          form
+        </p>
       </div>
     );
 
@@ -36,7 +43,9 @@ const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
           <h2 className="font-bold text-cyan-800">FROM:</h2>
           <h2 className="font-bold">{senderName.toUpperCase()}</h2>
           <div className={inter.className}>
-            {address?.map((item) => <p key={item}>{item}</p>)}
+            {address.split(';').map((item) => (
+              <p key={item}>{item}</p>
+            ))}
             <p>Email:{email}</p>
           </div>
         </div>
@@ -92,4 +101,4 @@ const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
   );
 };
 
-export default InvoiceDetails;
+export default InvoiceDetailsView;

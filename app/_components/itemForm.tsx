@@ -75,6 +75,7 @@ const ItemForm = ({
         title: result.message,
         variant: 'destructive',
       });
+      cleanForm();
       throw new Error(result.message);
     }
 

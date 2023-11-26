@@ -104,7 +104,7 @@ export async function getInvoiceDetails() {
   }
 }
 
-// get details
+// update details
 export async function updateInvoiceDetails(
   id: number,
   data: InvoiceDetailsWithoutId,

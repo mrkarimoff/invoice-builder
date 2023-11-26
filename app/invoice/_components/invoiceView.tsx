@@ -2,17 +2,17 @@
 
 import DataTable from '@/components/dataTable';
 import { Button } from '@/components/ui/button';
-import { type InvoiceItems } from '@prisma/client';
-import Link from 'next/link';
+import { type InvoiceDetails, type InvoiceItems } from '@prisma/client';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import InvoiceDetails from './invoiceDetails';
+import InvoiceDetailsView from './invoiceDetailsView';
 
 type InvoiceViewProps = {
-  invoiceItems: InvoiceItems[];
+  invoiceItems: InvoiceItems[] | null;
+  invoiceDetails: InvoiceDetails | null;
 };
 
-const InvoiceView = ({ invoiceItems }: InvoiceViewProps) => {
+const InvoiceView = ({ invoiceItems, invoiceDetails }: InvoiceViewProps) => {
   const componentRef = useRef(null);
 
   const handlePrint = useReactToPrint({
@@ -22,19 +22,13 @@ const InvoiceView = ({ invoiceItems }: InvoiceViewProps) => {
   return (
     <>
       <div className="flex gap-2">
-        <Link
-          className="rounded-md border border-blue-100 bg-slate-100 p-2 transition-colors hover:bg-blue-100"
-          href={'/'}
-        >
-          Edit Invoice
-        </Link>
         <Button variant={'default'} onClick={handlePrint}>
           Print this out!
         </Button>
       </div>
       <div ref={componentRef} className="flex flex-col items-start gap-2">
-        <InvoiceDetails data={null} />
-        <DataTable data={invoiceItems} />
+        <InvoiceDetailsView data={invoiceDetails} />
+        <DataTable data={invoiceItems ?? []} />
       </div>
     </>
   );

@@ -1,22 +1,16 @@
 import InvoiceView from '@/app/invoice/_components/invoiceView';
-import { getAllItems } from '../_actions/actions';
+import { getAllItems, getInvoiceDetails } from '../_actions/actions';
 
 const Page = async () => {
-  const result = await getAllItems();
-
-  if (!result.data) {
-    return (
-      <div className="container mx-auto p-4">
-        <p className="font-bold text-red-500">
-          {result.message} Try refreshing the page.
-        </p>
-      </div>
-    );
-  }
+  const itemsResult = await getAllItems();
+  const detailsResult = await getInvoiceDetails();
 
   return (
-    <div className="container mx-auto p-4">
-      <InvoiceView invoiceItems={result.data} />
+    <div className="container mx-auto my-2 rounded-md bg-white p-4">
+      <InvoiceView
+        invoiceItems={itemsResult.data}
+        invoiceDetails={detailsResult.data}
+      />
     </div>
   );
 };

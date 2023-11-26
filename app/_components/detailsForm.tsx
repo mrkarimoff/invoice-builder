@@ -25,6 +25,7 @@ import {
   saveInvoiceDetails,
   updateInvoiceDetails,
 } from '../_actions/actions';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const DetailsForm = () => {
   const { toast } = useToast();
@@ -96,7 +97,10 @@ const DetailsForm = () => {
       <Separator />
 
       {loading ? (
-        <p>Loading...</p>
+        <div>
+          <p>Loading...</p>
+          <Skeleton className="min-h-[180px] w-full bg-slate-200" />
+        </div>
       ) : (
         <form
           id="detailsForm"
