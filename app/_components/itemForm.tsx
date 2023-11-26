@@ -111,7 +111,7 @@ const ItemForm = ({
               <FormControl>
                 <Input
                   className="w-full md:w-[280px] "
-                  placeholder="mm/dd/yyy"
+                  placeholder="mm/dd/yyyy"
                   {...field}
                 />
               </FormControl>

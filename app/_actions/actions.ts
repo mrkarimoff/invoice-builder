@@ -48,7 +48,7 @@ export async function deleteItem(id: number) {
   }
 }
 
-// delete item
+// update item
 export async function updateItem(id: number, data: InvoiceItemWithoutId) {
   try {
     const updatedItem = await prisma.invoiceItems.update({
