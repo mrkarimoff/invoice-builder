@@ -18,22 +18,18 @@ const InvoiceManagementView = () => {
 
   const getInvoiceItems = useCallback(async () => {
     setLoading(true);
-    try {
-      const result = await getAllItems();
-      if (!result.data) {
-        setError(result.message);
-        toast({
-          title: result.message,
-          variant: 'destructive',
-        });
-        return;
-      }
-
-      setInvoiceItems(result.data);
-    } catch (error) {
-      setError('An error occurred while fetching data.');
-      console.error(error);
+    const result = await getAllItems();
+    if (!result.data) {
+      setError(result.message);
+      toast({
+        title: result.message,
+        variant: 'destructive',
+      });
+      setLoading(false);
+      return;
     }
+
+    setInvoiceItems(result.data);
     setLoading(false);
   }, [toast, setInvoiceItems]);
 
@@ -54,7 +50,7 @@ const InvoiceManagementView = () => {
         <h4 className="my-1 font-semibold">Invoice Table</h4>
         <div className="h-[1px] w-full bg-slate-200" />
         {error ? (
-          <p>Error: {error}. Please try refreshing the page.</p>
+          <p>Error: {error} Please try refreshing the page.</p>
         ) : (
           <>
             {invoiceItems.length > 0 ? (
@@ -69,7 +65,7 @@ const InvoiceManagementView = () => {
             ) : loading ? (
               <div>
                 <p>Loading...</p>
-                <Skeleton className="h-[150px] w-full" />
+                <Skeleton className="min-h-[150px] w-full" />
               </div>
             ) : (
               <NoDataMessage />

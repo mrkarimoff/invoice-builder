@@ -1,9 +1,10 @@
 'use server';
 
 import prisma from '@/lib/prisma';
-import { InvoiceItems } from '@prisma/client';
+import { type InvoiceDetails, type InvoiceItems } from '@prisma/client';
 
 type InvoiceItemWithoutId = Omit<InvoiceItems, 'id'>;
+type InvoiceDetailsWithoutId = Omit<InvoiceDetails, 'id'>;
 
 // add item
 export async function saveInvoiceItem(data: InvoiceItemWithoutId) {
@@ -61,6 +62,66 @@ export async function updateItem(id: number, data: InvoiceItemWithoutId) {
     };
   } catch (error) {
     return { data: null, error, message: 'Failed to update Item' };
+  }
+}
+
+// add details
+export async function saveInvoiceDetails(data: InvoiceDetailsWithoutId) {
+  try {
+    const newDetails = await prisma.invoiceDetails.create({
+      data,
+    });
+    return {
+      data: newDetails,
+      error: null,
+      message: 'Invoice details saved successfully',
+    };
+  } catch (error) {
+    return { data: null, error, message: 'Failed to save invoice details' };
+  }
+}
+
+// get details
+export async function getInvoiceDetails() {
+  try {
+    const details = await prisma.invoiceDetails.findFirst();
+
+    if (!details) {
+      return {
+        data: details,
+        error: null,
+        message: 'No details found yet, please fill out the form!',
+      };
+    }
+
+    return {
+      data: details,
+      error: null,
+      message: 'Invoice details fetched successfully',
+    };
+  } catch (error) {
+    return { data: null, error, message: 'Failed to fetch invoice details' };
+  }
+}
+
+// get details
+export async function updateInvoiceDetails(
+  id: number,
+  data: InvoiceDetailsWithoutId,
+) {
+  try {
+    const updatedDetails = await prisma.invoiceDetails.update({
+      where: { id },
+      data,
+    });
+
+    return {
+      data: updatedDetails,
+      error: null,
+      message: 'Invoice details updated successfully',
+    };
+  } catch (error) {
+    return { data: null, error, message: 'Failed to update invoice details' };
   }
 }
 

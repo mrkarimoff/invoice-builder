@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
+import { defaultItems } from '@/lib/constants';
 import { itemsFormSchema } from '@/lib/formSchemas';
 import { decimalToTimeString, timeStringToDecimal } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -36,10 +37,10 @@ const ItemForm = ({
 }: ItemFormProps) => {
   const { toast } = useToast();
   const [isSaving, setIsSaving] = useState(false);
-  const defaultValues = { date: '', description: '', hours: '', rate: '19' };
+
   const form = useForm<z.infer<typeof itemsFormSchema>>({
     resolver: zodResolver(itemsFormSchema),
-    defaultValues,
+    defaultValues: defaultItems,
   });
 
   useEffect(() => {
@@ -86,7 +87,7 @@ const ItemForm = ({
   const cleanForm = () => {
     getInvoiceItems();
     setIsSaving(false);
-    form.reset(defaultValues);
+    form.reset(defaultItems);
     setCurrentItem(null);
   };
 

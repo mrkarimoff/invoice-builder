@@ -5,10 +5,17 @@ const lora = Lora({ subsets: ['latin'] });
 const inter = Inter({ subsets: ['latin'] });
 
 type InvoiceDetailsProps = {
-  data: InvoiceDetails;
+  data: InvoiceDetails | null;
 };
 
 const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
+  if (!data)
+    return (
+      <div className="flex h-20 w-full items-center justify-center">
+        <p className="text-muted-foreground">No details provided!</p>
+      </div>
+    );
+
   const {
     address,
     dueDate,
@@ -29,9 +36,7 @@ const InvoiceDetails = ({ data }: InvoiceDetailsProps) => {
           <h2 className="font-bold text-cyan-800">FROM:</h2>
           <h2 className="font-bold">{senderName.toUpperCase()}</h2>
           <div className={inter.className}>
-            {address.map((item) => (
-              <p key={item}>{item}</p>
-            ))}
+            {address?.map((item) => <p key={item}>{item}</p>)}
             <p>Email:{email}</p>
           </div>
         </div>

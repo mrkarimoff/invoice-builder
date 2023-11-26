@@ -2,7 +2,6 @@
 
 import DataTable from '@/components/dataTable';
 import { Button } from '@/components/ui/button';
-import { templateData } from '@/lib/constants';
 import { type InvoiceItems } from '@prisma/client';
 import Link from 'next/link';
 import { useRef } from 'react';
@@ -34,7 +33,7 @@ const InvoiceView = ({ invoiceItems }: InvoiceViewProps) => {
         </Button>
       </div>
       <div ref={componentRef} className="flex flex-col items-start gap-2">
-        <InvoiceDetails data={templateData} />
+        <InvoiceDetails data={null} />
         <DataTable data={invoiceItems} />
       </div>
     </>
