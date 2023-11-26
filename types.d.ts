@@ -8,10 +8,3 @@ export interface InvoiceDetails {
   dueDate: string;
   invoicePurpose: string;
 }
-
-export interface InvoiceItem {
-  date: string;
-  description: string;
-  hours: number;
-  rate: number;
-}

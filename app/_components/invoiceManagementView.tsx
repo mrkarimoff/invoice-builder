@@ -2,7 +2,7 @@
 
 import DataTable from '@/components/dataTable';
 import { useToast } from '@/components/ui/use-toast';
-import { InvoiceItems } from '@prisma/client';
+import { type InvoiceItems } from '@prisma/client';
 import { useCallback, useEffect, useState } from 'react';
 import { deleteItem, getAllItems } from '../_actions/actions';
 import ItemForm from './itemForm';
@@ -11,6 +11,7 @@ import NoDataMessage from './noDataMessage';
 const InvoiceManagementView = () => {
   const [invoiceItems, setInvoiceItems] = useState<Array<InvoiceItems>>([]);
   const [loading, setLoading] = useState(true);
+  const [currentItem, setCurrentItem] = useState<InvoiceItems | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -42,7 +43,11 @@ const InvoiceManagementView = () => {
   return (
     <div className="space-y-5">
       <div className="rounded-md bg-blue-50 p-4">
-        <ItemForm getInvoiceItems={getInvoiceItems} />
+        <ItemForm
+          currentItem={currentItem}
+          setCurrentItem={setCurrentItem}
+          getInvoiceItems={getInvoiceItems}
+        />
       </div>
       <div className="rounded-md bg-white p-4">
         <h4 className="my-1 font-semibold">Invoice Table</h4>
@@ -55,7 +60,11 @@ const InvoiceManagementView = () => {
             {invoiceItems.length > 0 ? (
               <DataTable
                 data={invoiceItems}
-                actions={{ get: getInvoiceItems, delete: deleteItem }}
+                actions={{
+                  get: getInvoiceItems,
+                  delete: deleteItem,
+                  edit: setCurrentItem,
+                }}
               />
             ) : (
               <NoDataMessage />

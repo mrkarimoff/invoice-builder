@@ -10,16 +10,20 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { isOdd } from '@/lib/utils';
-import { InvoiceItems } from '@prisma/client';
+import { type InvoiceItems } from '@prisma/client';
 import { Loader, PenSquare, Trash } from 'lucide-react';
-import { useState } from 'react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { customComponents } from './customComponents';
 import { useToast } from './ui/use-toast';
 
 type DataTableProps = {
   data: InvoiceItems[];
-  actions?: { get: () => Promise<void>; delete: DeleteItem };
+  actions?: {
+    get: () => Promise<void>;
+    delete: DeleteItem;
+    edit: Dispatch<SetStateAction<InvoiceItems | null>>;
+  };
 };
 
 export default function DataTable({ data, actions }: DataTableProps) {
@@ -94,7 +98,7 @@ export default function DataTable({ data, actions }: DataTableProps) {
             {actions && (
               <TableCell className="border border-slate-200 font-bold">
                 <div className="flex justify-between gap-1">
-                  <button>
+                  <button onClick={() => actions.edit(invoice)}>
                     <PenSquare className="text-blue-500 transition-colors hover:text-blue-300" />
                   </button>
                   <button

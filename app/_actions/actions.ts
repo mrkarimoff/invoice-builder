@@ -1,10 +1,12 @@
 'use server';
 
 import prisma from '@/lib/prisma';
-import { InvoiceItem } from '@/types';
+import { InvoiceItems } from '@prisma/client';
+
+type InvoiceItemWithoutId = Omit<InvoiceItems, 'id'>;
 
 // add item
-export async function saveInvoiceItem(data: InvoiceItem) {
+export async function saveInvoiceItem(data: InvoiceItemWithoutId) {
   try {
     const newItem = await prisma.invoiceItems.create({
       data,
@@ -42,6 +44,23 @@ export async function deleteItem(id: number) {
     };
   } catch (error) {
     return { data: null, error, message: 'Failed to delete Item' };
+  }
+}
+
+// delete item
+export async function updateItem(id: number, data: InvoiceItemWithoutId) {
+  try {
+    const updatedItem = await prisma.invoiceItems.update({
+      where: { id },
+      data,
+    });
+    return {
+      data: updatedItem,
+      error: null,
+      message: 'Item updated successfully',
+    };
+  } catch (error) {
+    return { data: null, error, message: 'Failed to update Item' };
   }
 }
 
