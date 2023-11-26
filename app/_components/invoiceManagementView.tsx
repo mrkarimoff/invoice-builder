@@ -1,6 +1,7 @@
 'use client';
 
 import DataTable from '@/components/dataTable';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
 import { type InvoiceItems } from '@prisma/client';
 import { useCallback, useEffect, useState } from 'react';
@@ -52,9 +53,8 @@ const InvoiceManagementView = () => {
       <div className="rounded-md bg-white p-4">
         <h4 className="my-1 font-semibold">Invoice Table</h4>
         <div className="h-[1px] w-full bg-slate-200" />
-        {loading && <p>Loading...</p>}
         {error ? (
-          <p>Error: {error}</p>
+          <p>Error: {error}. Please try refreshing the page.</p>
         ) : (
           <>
             {invoiceItems.length > 0 ? (
@@ -66,6 +66,11 @@ const InvoiceManagementView = () => {
                   edit: setCurrentItem,
                 }}
               />
+            ) : loading ? (
+              <div>
+                <p>Loading...</p>
+                <Skeleton className="h-[150px] w-full" />
+              </div>
             ) : (
               <NoDataMessage />
             )}

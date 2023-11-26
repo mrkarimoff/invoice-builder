@@ -1,7 +1,7 @@
-import React from 'react';
+import { type ReactNode } from 'react';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  return <div className="bg-white">{children}</div>;
+const Layout = ({ children }: { children: ReactNode }) => {
+  return <div>{children}</div>;
 };
 
 export default Layout;

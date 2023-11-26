@@ -24,10 +24,10 @@ export async function getAllItems() {
     return {
       data: invoiceItems,
       error: null,
-      message: 'Items retrieved successfully',
+      message: 'Items fetched successfully',
     };
   } catch (error) {
-    return { data: null, error, message: 'Failed to get Items' };
+    return { data: null, error, message: 'Failed to fetch Items' };
   }
 }
 

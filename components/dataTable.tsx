@@ -5,7 +5,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableRow,
 } from '@/components/ui/table';
@@ -99,7 +98,10 @@ export default function DataTable({ data, actions }: DataTableProps) {
               <TableCell className="border border-slate-200 font-bold">
                 <div className="flex justify-between gap-1">
                   <button onClick={() => actions.edit(invoice)}>
-                    <PenSquare className="text-blue-500 transition-colors hover:text-blue-300" />
+                    <PenSquare
+                      size={20}
+                      className="text-blue-500 transition-colors hover:text-blue-300"
+                    />
                   </button>
                   <button
                     disabled={itemId === invoice.id}
@@ -108,7 +110,10 @@ export default function DataTable({ data, actions }: DataTableProps) {
                     {itemId === invoice.id ? (
                       <Loader className="animate-spin text-red-500" />
                     ) : (
-                      <Trash className="text-red-500 transition-colors hover:text-red-300" />
+                      <Trash
+                        size={20}
+                        className="text-red-500 transition-colors hover:text-red-300"
+                      />
                     )}
                   </button>
                 </div>
@@ -116,8 +121,7 @@ export default function DataTable({ data, actions }: DataTableProps) {
             )}
           </TableRow>
         ))}
-      </TableBody>
-      <TableFooter className="bg-white text-black">
+
         <TableRow>
           <TableCell className="text-right text-base font-bold" colSpan={4}>
             TOTAL
@@ -129,7 +133,7 @@ export default function DataTable({ data, actions }: DataTableProps) {
               .toFixed(2)}
           </TableCell>
         </TableRow>
-      </TableFooter>
+      </TableBody>
     </Table>
   );
 }
