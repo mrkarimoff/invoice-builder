@@ -21,7 +21,13 @@ export async function saveInvoiceItem(data: InvoiceItemWithoutId) {
 // get all items
 export async function getAllItems() {
   try {
-    const invoiceItems = await prisma.invoiceItems.findMany();
+    const invoiceItems = await prisma.invoiceItems.findMany({
+      orderBy: [
+        {
+          id: 'asc',
+        },
+      ],
+    });
     return {
       data: invoiceItems,
       error: null,
