@@ -62,7 +62,7 @@ const InvoiceDetailsView = ({ data }: InvoiceDetailsViewProps) => {
           <div>
             <p>
               <span className="text-base font-bold text-cyan-800">
-                INVOICE ID:
+                INVOICE ID:{' '}
               </span>
               <span
                 className={`text-sm font-semibold text-black ${inter.className}`}
@@ -72,7 +72,7 @@ const InvoiceDetailsView = ({ data }: InvoiceDetailsViewProps) => {
             </p>
             <p>
               <span className="text-base font-bold text-cyan-800">
-                ISSUE DATE:
+                ISSUE DATE:{' '}
               </span>
               <span
                 className={`text-sm font-semibold text-black ${inter.className}`}
@@ -82,7 +82,7 @@ const InvoiceDetailsView = ({ data }: InvoiceDetailsViewProps) => {
             </p>
             <p>
               <span className="text-base font-bold text-cyan-800">
-                DUE DATE:
+                DUE DATE:{' '}
               </span>
               <span
                 className={`text-sm font-semibold text-black ${inter.className}`}
@@ -93,7 +93,7 @@ const InvoiceDetailsView = ({ data }: InvoiceDetailsViewProps) => {
           </div>
           <div>
             <h2 className="font-bold text-cyan-800">FOR:</h2>
-            <p className="text-xs">{invoicePurpose}</p>
+            <p className="text-sm">{invoicePurpose}</p>
           </div>
         </div>
       </div>
