@@ -46,7 +46,7 @@ const InvoiceDetailsView = ({ data }: InvoiceDetailsViewProps) => {
             {address.split(';').map((item) => (
               <p key={item}>{item}</p>
             ))}
-            <p>Email:{email}</p>
+            <p>Email: {email}</p>
           </div>
         </div>
         <div>
