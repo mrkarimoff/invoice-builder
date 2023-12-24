@@ -106,6 +106,7 @@ export default function DataTable({ data, actions }: DataTableProps) {
             {actions && (
               <TableHead className="w-[100px]">
                 <Checkbox
+                  checked={!!selectedItems.length}
                   onCheckedChange={(checkState) =>
                     checkState ? setSelectedItems(data) : setSelectedItems([])
                   }
