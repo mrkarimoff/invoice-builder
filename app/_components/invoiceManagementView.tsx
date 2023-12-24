@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
 import { type InvoiceItems } from '@prisma/client';
 import { useCallback, useEffect, useState } from 'react';
-import { deleteItem, getAllItems } from '../_actions/actions';
+import { deleteItem, deleteSelected, getAllItems } from '../_actions/actions';
 import ItemForm from './itemForm';
 import NoDataMessage from './noDataMessage';
 
@@ -60,6 +60,7 @@ const InvoiceManagementView = () => {
                   get: getInvoiceItems,
                   delete: deleteItem,
                   edit: setCurrentItem,
+                  deleteSelected: deleteSelected,
                 }}
               />
             ) : loading ? (

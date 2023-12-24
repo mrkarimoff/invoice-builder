@@ -54,6 +54,28 @@ export async function deleteItem(id: number) {
   }
 }
 
+// delete selected items
+export async function deleteSelected(items: InvoiceItems[]) {
+  const IDs = items.map((item) => item.id);
+
+  try {
+    const deletedItems = await prisma.invoiceItems.deleteMany({
+      where: {
+        id: {
+          in: IDs,
+        },
+      },
+    });
+    return {
+      data: deletedItems,
+      error: null,
+      message: 'Selected items deleted successfully',
+    };
+  } catch (error) {
+    return { data: null, error, message: 'Failed to delete selected Items' };
+  }
+}
+
 // update item
 export async function updateItem(id: number, data: InvoiceItemWithoutId) {
   try {
@@ -131,4 +153,5 @@ export async function updateInvoiceDetails(
   }
 }
 
-export type DeleteItem = typeof deleteItem;
+export type DeleteItemFunction = typeof deleteItem;
+export type DeleteSelectedItemsFunction = typeof deleteSelected;
