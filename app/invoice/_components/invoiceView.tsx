@@ -7,6 +7,7 @@ import { Lora } from 'next/font/google';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import InvoiceDetailsView from './invoiceDetailsView';
+import Link from 'next/link';
 
 const lora = Lora({ subsets: ['latin'] });
 
@@ -25,6 +26,9 @@ const InvoiceView = ({ invoiceItems, invoiceDetails }: InvoiceViewProps) => {
   return (
     <>
       <div className="flex gap-2">
+        <Link href={'/'}>
+          <Button>Edit Invoice</Button>
+        </Link>
         <Button variant={'default'} onClick={handlePrint}>
           Print this out!
         </Button>

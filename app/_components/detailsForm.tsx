@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
 import { defaultDetails, templateData } from '@/lib/constants';
 import { detailsFormSchema } from '@/lib/formSchemas';
@@ -25,7 +26,6 @@ import {
   saveInvoiceDetails,
   updateInvoiceDetails,
 } from '../_actions/actions';
-import { Skeleton } from '@/components/ui/skeleton';
 
 const DetailsForm = () => {
   const { toast } = useToast();
