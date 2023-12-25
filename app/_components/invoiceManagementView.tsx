@@ -5,11 +5,19 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
 import { type InvoiceItems } from '@prisma/client';
 import { useCallback, useEffect, useState } from 'react';
-import { deleteItem, deleteSelected, getAllItems } from '../_actions/actions';
+import {
+  deleteItem,
+  deleteSelected,
+  getAllItemsByUserId,
+} from '../_actions/actions';
 import ItemForm from './itemForm';
 import NoDataMessage from './noDataMessage';
 
-const InvoiceManagementView = () => {
+type InvoiceManagementViewProps = {
+  userId: string;
+};
+
+const InvoiceManagementView = ({ userId }: InvoiceManagementViewProps) => {
   const [invoiceItems, setInvoiceItems] = useState<Array<InvoiceItems>>([]);
   const [loading, setLoading] = useState(true);
   const [currentItem, setCurrentItem] = useState<InvoiceItems | null>(null);
@@ -18,7 +26,7 @@ const InvoiceManagementView = () => {
 
   const getInvoiceItems = useCallback(async () => {
     setLoading(true);
-    const result = await getAllItems();
+    const result = await getAllItemsByUserId(userId);
     if (!result.data) {
       setError(result.message);
       toast({
@@ -31,7 +39,7 @@ const InvoiceManagementView = () => {
 
     setInvoiceItems(result.data);
     setLoading(false);
-  }, [toast, setInvoiceItems]);
+  }, [toast, setInvoiceItems, userId]);
 
   useEffect(() => {
     getInvoiceItems();
@@ -41,6 +49,7 @@ const InvoiceManagementView = () => {
     <div className="space-y-5">
       <div className="rounded-md bg-blue-50 p-4">
         <ItemForm
+          userId={userId}
           currentItem={currentItem}
           setCurrentItem={setCurrentItem}
           getInvoiceItems={getInvoiceItems}

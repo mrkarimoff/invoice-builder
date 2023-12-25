@@ -19,9 +19,10 @@ export async function saveInvoiceItem(data: InvoiceItemWithoutId) {
 }
 
 // get all items
-export async function getAllItems() {
+export async function getAllItemsByUserId(userId: string) {
   try {
     const invoiceItems = await prisma.invoiceItems.findMany({
+      where: { userId },
       orderBy: [
         {
           id: 'asc',
@@ -39,10 +40,10 @@ export async function getAllItems() {
 }
 
 // delete item
-export async function deleteItem(id: number) {
+export async function deleteItem(id: number, userId: string) {
   try {
     const deletedItem = await prisma.invoiceItems.delete({
-      where: { id },
+      where: { id, userId },
     });
     return {
       data: deletedItem,
@@ -80,7 +81,7 @@ export async function deleteSelected(items: InvoiceItems[]) {
 export async function updateItem(id: number, data: InvoiceItemWithoutId) {
   try {
     const updatedItem = await prisma.invoiceItems.update({
-      where: { id },
+      where: { id, userId: data.userId },
       data,
     });
     return {
@@ -110,9 +111,11 @@ export async function saveInvoiceDetails(data: InvoiceDetailsWithoutId) {
 }
 
 // get details
-export async function getInvoiceDetails() {
+export async function getInvoiceDetails(userId: string) {
   try {
-    const details = await prisma.invoiceDetails.findFirst();
+    const details = await prisma.invoiceDetails.findFirst({
+      where: { userId },
+    });
 
     if (!details) {
       return {
@@ -139,7 +142,7 @@ export async function updateInvoiceDetails(
 ) {
   try {
     const updatedDetails = await prisma.invoiceDetails.update({
-      where: { id },
+      where: { id, userId: data.userId },
       data,
     });
 

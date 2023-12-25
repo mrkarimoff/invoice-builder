@@ -27,7 +27,11 @@ import {
   updateInvoiceDetails,
 } from '../_actions/actions';
 
-const DetailsForm = () => {
+type DetailsFormProps = {
+  userId: string;
+};
+
+const DetailsForm = ({ userId }: DetailsFormProps) => {
   const { toast } = useToast();
   const [isSaving, setIsSaving] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +44,7 @@ const DetailsForm = () => {
 
   const fetchInvoiceDetails = useCallback(async () => {
     setLoading(true);
-    const result = await getInvoiceDetails();
+    const result = await getInvoiceDetails(userId);
     if (!result.data) {
       toast({
         title: result.message,
@@ -49,7 +53,7 @@ const DetailsForm = () => {
     }
     setInvoiceDetails(result.data);
     setLoading(false);
-  }, [toast]);
+  }, [toast, userId]);
 
   useEffect(() => {
     fetchInvoiceDetails();
@@ -71,9 +75,12 @@ const DetailsForm = () => {
     let result;
 
     if (invoiceDetails) {
-      result = await updateInvoiceDetails(invoiceDetails.id, values);
+      result = await updateInvoiceDetails(invoiceDetails.id, {
+        ...values,
+        userId,
+      });
     } else {
-      result = await saveInvoiceDetails(values);
+      result = await saveInvoiceDetails({ ...values, userId });
     }
 
     if (result && !result.data) {

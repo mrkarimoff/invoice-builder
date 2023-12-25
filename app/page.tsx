@@ -2,8 +2,13 @@ import Link from 'next/link';
 import DetailsForm from './_components/detailsForm';
 import InvoiceManagementView from './_components/invoiceManagementView';
 import { Button } from '@/components/ui/button';
+import { auth } from '@clerk/nextjs';
 
 const Page = () => {
+  const { userId } = auth();
+
+  if (!userId) return null;
+
   return (
     <div>
       <div className="container mx-auto p-4">
@@ -15,9 +20,9 @@ const Page = () => {
         </h2>
         <div className="flex flex-col gap-5">
           <div className="rounded-md bg-blue-50 p-4">
-            <DetailsForm />
+            <DetailsForm userId={userId} />
           </div>
-          <InvoiceManagementView />
+          <InvoiceManagementView userId={userId} />
         </div>
       </div>
     </div>

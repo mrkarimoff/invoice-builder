@@ -21,6 +21,7 @@ model InvoiceDetails {
   issueDate      String
   dueDate        String
   invoicePurpose String
+  userId         String
 }
 
 model InvoiceItems {
@@ -29,4 +30,5 @@ model InvoiceItems {
   description String
   hours       Float
   rate        Int
+  userId      String
 }

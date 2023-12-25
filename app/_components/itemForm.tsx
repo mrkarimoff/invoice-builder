@@ -28,12 +28,14 @@ type ItemFormProps = {
   getInvoiceItems: () => Promise<void>;
   currentItem: InvoiceItems | null;
   setCurrentItem: Dispatch<SetStateAction<InvoiceItems | null>>;
+  userId: string;
 };
 
 const ItemForm = ({
   getInvoiceItems,
   setCurrentItem,
   currentItem,
+  userId,
 }: ItemFormProps) => {
   const { toast } = useToast();
   const [isSaving, setIsSaving] = useState(false);
@@ -61,6 +63,7 @@ const ItemForm = ({
       ...values,
       hours: +decimalTime.toFixed(2),
       rate: +values.rate,
+      userId,
     };
     let result;
 

@@ -50,13 +50,14 @@ export default function DataTable({ data, actions }: DataTableProps) {
         actions.get();
       }
     }
+    setSelectedItems([]);
     setIsDeleting(false);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number, userId: string) => {
     setItemId(id);
     if (actions) {
-      const result = await actions.delete(id);
+      const result = await actions.delete(id, userId);
       if (!result.data) {
         toast({
           title: result.message,
@@ -189,7 +190,7 @@ export default function DataTable({ data, actions }: DataTableProps) {
                     </button>
                     <button
                       disabled={itemId === invoice.id}
-                      onClick={() => handleDelete(invoice.id)}
+                      onClick={() => handleDelete(invoice.id, invoice.userId)}
                     >
                       {itemId === invoice.id ? (
                         <Loader className="animate-spin text-red-500" />
