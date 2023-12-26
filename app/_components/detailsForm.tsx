@@ -278,7 +278,12 @@ const DetailsForm = ({ userId }: DetailsFormProps) => {
         </form>
       )}
       <div className="mt-3 flex items-center justify-end gap-1.5">
-        <Button onClick={putTemplate} variant={'outline'} type="button">
+        <Button
+          size={'sm'}
+          onClick={putTemplate}
+          variant={'outline'}
+          type="button"
+        >
           Use template
         </Button>
         <Button
@@ -286,6 +291,7 @@ const DetailsForm = ({ userId }: DetailsFormProps) => {
           form="detailsForm"
           type="submit"
           disabled={isSaving}
+          size={'sm'}
         >
           {isSaving ? 'Saving...' : 'Save'}
         </Button>

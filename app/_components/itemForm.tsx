@@ -188,6 +188,7 @@ const ItemForm = ({
           form="itemForm"
           type="submit"
           disabled={isSaving}
+          size={'sm'}
         >
           {isSaving ? 'Saving...' : 'Save'}
         </Button>

@@ -8,6 +8,7 @@ import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import InvoiceDetailsView from './invoiceDetailsView';
 import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 const lora = Lora({ subsets: ['latin'] });
 
@@ -27,9 +28,12 @@ const InvoiceView = ({ invoiceItems, invoiceDetails }: InvoiceViewProps) => {
     <>
       <div className="flex gap-2">
         <Link href={'/'}>
-          <Button>Edit Invoice</Button>
+          <Button className="space-x-2" size={'sm'}>
+            <ArrowLeft size={18} />
+            <span>Edit Invoice</span>
+          </Button>
         </Link>
-        <Button variant={'default'} onClick={handlePrint}>
+        <Button size={'sm'} variant={'default'} onClick={handlePrint}>
           Print this out!
         </Button>
       </div>

@@ -10,7 +10,7 @@ const Navbar = async () => {
         <div className="flex flex-col">
           <Link
             href={'/'}
-            className="font-mono font-semibold text-black transition-colors hover:text-slate-700 sm:text-xl"
+            className="font-mono font-extrabold text-black transition-colors hover:text-slate-700 sm:text-xl sm:font-bold"
           >
             INVOICE_BUILDER
           </Link>
