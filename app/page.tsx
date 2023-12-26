@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import DetailsForm from './_components/detailsForm';
-import InvoiceManagementView from './_components/invoiceManagementView';
 import { Button } from '@/components/ui/button';
 import { auth } from '@clerk/nextjs';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import DetailsForm from './_components/detailsForm';
+import InvoiceManagementView from './_components/invoiceManagementView';
 
 const Page = () => {
   const { userId } = auth();

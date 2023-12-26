@@ -3,12 +3,12 @@
 import DataTable from '@/components/dataTable';
 import { Button } from '@/components/ui/button';
 import { type InvoiceDetails, type InvoiceItems } from '@prisma/client';
+import { ArrowLeft } from 'lucide-react';
 import { Lora } from 'next/font/google';
+import Link from 'next/link';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import InvoiceDetailsView from './invoiceDetailsView';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 
 const lora = Lora({ subsets: ['latin'] });
 
