@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} bg-slate-400`}>
+        <body className={`${inter.className} bg-slate-500`}>
           <Navbar />
           {children}
           <Toaster />

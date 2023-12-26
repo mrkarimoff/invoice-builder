@@ -5,12 +5,12 @@ const Navbar = async () => {
   const user = await currentUser();
 
   return (
-    <div className="sticky top-0 z-50 bg-slate-400">
+    <div className="sticky top-0 z-50 bg-slate-500">
       <div className="container flex h-[60px] items-center justify-between gap-1">
         <div className="flex flex-col">
           <Link
             href={'/'}
-            className="font-mono font-extrabold text-black transition-colors hover:text-slate-700 sm:text-xl sm:font-bold"
+            className="font-mono font-extrabold text-black transition-colors hover:text-slate-800 sm:text-xl sm:font-bold"
           >
             INVOICE_BUILDER
           </Link>
